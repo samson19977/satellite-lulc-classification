@@ -1,6 +1,6 @@
 // ============================================================
 //  Land Use / Land Cover Classification — Google Earth Engine
-//  Author  : Your Name
+//  Author  : Samson Niyizurugero
 //  Region  : Lake Victoria Basin, East Africa (customisable)
 //  Sensor  : Sentinel-2 SR (10 m)
 //  Method  : Random Forest supervised classification
@@ -43,13 +43,7 @@ var evi  = s2.expression(
 var composite = s2.select(['B2','B3','B4','B8','B11','B12'])
                   .addBands([ndvi, ndwi, ndbi, evi]);
 
-// ── 4. TRAINING SAMPLES ──────────────────────────────────────
-// *** Replace these with your own digitised polygons ***
-var water      = ee.FeatureCollection('users/YOUR_USER/lulc/water');
-var forest     = ee.FeatureCollection('users/YOUR_USER/lulc/forest');
-var cropland   = ee.FeatureCollection('users/YOUR_USER/lulc/cropland');
-var urban      = ee.FeatureCollection('users/YOUR_USER/lulc/urban');
-var grassland  = ee.FeatureCollection('users/YOUR_USER/lulc/grassland');
+
 
 // Class labels  0=Water 1=Forest 2=Cropland 3=Urban 4=Grassland
 var trainingData = water.merge(forest).merge(cropland)
@@ -61,7 +55,7 @@ var training = composite.sampleRegions({
   scale      : 10
 });
 
-// ── 5. TRAIN RANDOM FOREST ───────────────────────────────────
+// ── 4. TRAIN RANDOM FOREST ───────────────────────────────────
 var classifier = ee.Classifier.smileRandomForest({
   numberOfTrees      : 100,
   variablesPerSplit  : 4,
@@ -74,7 +68,7 @@ var classifier = ee.Classifier.smileRandomForest({
   inputProperties : composite.bandNames()
 });
 
-// ── 6. CLASSIFY ──────────────────────────────────────────────
+// ── 5. CLASSIFY ──────────────────────────────────────────────
 var classified = composite.classify(classifier);
 
 // ── 7. ACCURACY ASSESSMENT ───────────────────────────────────
