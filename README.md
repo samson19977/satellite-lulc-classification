@@ -90,15 +90,14 @@ lulc-gee-project/
 
 1. Open [code.earthengine.google.com](https://code.earthengine.google.com)
 2. Copy-paste `scripts/lulc_classification.js`
-3. Replace `users/YOUR_USER/lulc/*` asset paths with your own training polygons
-4. Click **Run** — results appear in the map panel and console
-5. Use the export task to download `lulc_2023.tif` to Google Drive
+3. Click **Run** — results appear in the map panel and console
+4. Use the export task to download `lulc_2023.tif` to Google Drive
 
 ### 2 · Python post-processing
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/lulc-gee-project.git
+git clone https://github.com/samson19977/lulc-gee-project.git
 cd lulc-gee-project
 
 # Install dependencies
@@ -157,7 +156,7 @@ jupyter notebook notebooks/lulc_analysis.ipynb
 
 ## 📄 License
 
-MIT © 2024 Your Name
+MIT © 2024 Samson Niyizurugero
 
 ---
 
